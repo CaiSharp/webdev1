@@ -1,8 +1,8 @@
 # webdev1
 
-version number:
-git status
-npm_version_patch
-npm --help version
+<h2>basic calculator</h2>
+<li>takes 2 arguments and 1 operator</li>
+<li>can add, substract, divide, multiply</li>
 
-x instead of *
+<h3>how to use:</h3>
+<p>type <i>"node app"</i> followed by your equation into the console</p>
