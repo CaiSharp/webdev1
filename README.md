@@ -1,7 +1,9 @@
 # webdev1
 
-<h2>dnsrocks</h2>
-<li>console logs TXT from websites</li>
+dnsrocks <br>
+*console logs TXT from websites
 
-<h3>how to use:</h3>
-<p>type <i>"node app"</i> into the console
+how to use: <br>
+*type "node app"into the console
+
+website: caisharp.cc
