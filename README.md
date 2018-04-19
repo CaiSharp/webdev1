@@ -6,4 +6,4 @@ dnsrocks <br>
 how to use: <br>
 *type "node app"into the console
 
-website: caisharp.cc
+website: caisharp.cc and www.caisharp.cc works as well
