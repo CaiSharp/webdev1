@@ -1,9 +1,7 @@
 # webdev1
 
-dnsrocks <br>
-*console logs TXT from websites
+###basic visitor counter which uses a tcp client to server connection
 
-how to use: <br>
-*type "node app"into the console
-
-website: caisharp.cc and www.caisharp.cc works as well
+####how to use:
+* run 'node server' to start the server
+* run 'node app' to make client requests to the server and get the visitor  count
