@@ -1,7 +1,7 @@
 const net = require('net');
 const http = require('http');
 const HOST = '127.0.0.1';
-const PORT = 80;
+const PORT = 5000;
 const PORT2 = 3000;
 
 let visitorCount = 0;
@@ -30,7 +30,6 @@ net.createServer(function(socket) {
 }).listen(PORT, HOST);
 
 console.log('Server 1 listening on ' + HOST +':'+ PORT);
-
 
 //create server for http browser request
 http.createServer(function (req,res) {
