@@ -1,54 +1,42 @@
+//GLOBAL VARIABLES
 const net = require('net');
-const http = require('http');
-const HOST = '127.0.0.1';
-const PORT = 5000;
-const PORT2 = 3000;
+const port = 3000;
+let visitorCounter = 0;
 
-let visitorCount = 0;
+const server = net.createServer(function (socket) {
+    socket.on('data', function (data) {
 
-//create server with socket object for client/server exchange
-net.createServer(function(socket) {
+        //WRITE RESPONSE HEADER
+        socket.write('HTTP/1.1 200 OK\r\n');
+        socket.write('Content-Type: text/plain; charset=utf-8\r\n');
 
-    //log client connection
-    console.log('CONNECTED: ' + socket.remoteAddress +':'+ socket.remotePort);
-    visitorCount++;
+        dataString = data.toString();
 
-    //if data is send from client
-    socket.on('data', function(data) {
+        //INCREASES VISITORCOUNT ONLY FOR REQUESTS ON /VISIT, EXCLUDES FAVICION REQUESTS
+        checkRequest(dataString);
 
-        //log message from client && give the visitorCount back
-        console.log('CLIENT MESSAGE: ' + socket.remoteAddress + ': ' + data);
-        console.log('VISITOR COUNT: ' + visitorCount);
-        socket.write("You're visitor " + visitorCount);
+        //WRITE TO SOCKET && DISPLAY ON SITE
+        socket.write('\r\n');
+        socket.write(` You're Visitor Number : ${visitorCounter}`);
+
+        //ERROR HANDLING
+        socket.on('error', (err) => {
+            socket.write('Stuff happend and now nothing works, bummer!');
+            socket.end();
+        });
+
+        //KILL CONNECTION
+        socket.end();
     });
+}).listen(port);
 
-    //give status if connection to client is closed
-    socket.on('close', function(data) {
-        console.log('CLOSED: ' + socket.remoteAddress +' '+ socket.remotePort);
-    });
 
-}).listen(PORT, HOST);
-
-console.log('Server 1 listening on ' + HOST +':'+ PORT);
-
-//create server for http browser request
-http.createServer(function (req,res) {
-
-    //ignore favicon browser request
-    if (req.url === '/favicon.ico') {
-        res.writeHead(200, {'Content-Type': 'image/x-icon'});
-        res.end();
-        return;
+//FUNCTIONS
+function checkRequest(dataString){
+    if (dataString.includes(`/visit`) && !(dataString.includes(`favicon`))){
+        visitorCounter++;
+        console.log(`Current visitor count : ${visitorCounter}`);
+    }else if(!(dataString.includes(`favicon`))){
+        console.log(`Current visitor count : ${visitorCounter}`);
     }
-
-    //sets response head
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-
-    //increases visitor count && logs it, displays it in the browser as well
-    visitorCount++;
-    res.write(`${visitorCount}`);
-    res.end();
-    console.log(`OI! You're visitor ${visitorCount}!`);
-}).listen(PORT2);
-
-console.log('Server 2 listening on ' + HOST +':'+ PORT2);
+}

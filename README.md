@@ -1,17 +1,15 @@
 # webdev1
 
-##basic visitor counter
+###basic visitor counter
 
-##how to use:
-* run 'node server' to start the server
-* lists both http and net server in terminal
+run the server with either command: <br>
 
-#####You can now either:
+* "*node server*" 
+* "*npm start*". 
 
-* run 'node app' to make client requests to the server and get the visitor  count logged
-* visit localhost 127.0.0.1:5000 and get the visitor count logged
+<br>Then navigate to the following URLs to preform the desired request: 
 
-####or
+**localhost:3000** - view visitor count (GET) <br>
+**localhost:3000/visit** - increases visitor count && returns (GET)
 
-* visit localhost 127.0.0.1:3000 and view the counter on page / terminal has it logged as well
 

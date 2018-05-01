@@ -3,7 +3,9 @@
   "version": "3.2.2",
   "description": "webdev uebung01",
   "main": "script.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CaiSharp/webdev1.git"
