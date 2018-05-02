@@ -1,6 +1,6 @@
 # webdev1
 
-###basic visitor counter
+###basic sort program
 
 run the server with either command: <br>
 
