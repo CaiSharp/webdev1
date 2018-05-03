@@ -7,9 +7,8 @@ run the server with either command: <br>
 * "*node server*" 
 * "*npm start*". 
 
-<br>Then navigate to the following URLs to preform the desired request: 
+<br>Then use POSTMAN to POST on the following address: 
 
-**localhost:3000** - view visitor count (GET) <br>
-**localhost:3000/visit** - increases visitor count && returns (GET)
+**localhost:3000**
 
 
