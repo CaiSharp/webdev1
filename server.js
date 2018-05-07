@@ -5,60 +5,71 @@ const port = 3000;
 //CREATE SERVER
 const server = net.createServer(function (socket) {
     socket.on('data', function (data) {
+        let local;
+        let sortedArr;
 
-        //SPLIT IN LINES
-        let lines = data.toString().split('\r\n');
+        if(!data.toString().includes(`GET /favicon.ico HTTP/1.1`)){
 
-        //GET LINE WITH ACCEPTED LANGUAGE
-        let lang = getLine(lines, 'Accept-Language').replace('Accept-Language: ', '').split(',')[0];
+            //SPLIT IN LINES, STORE IN ARRAY
+            let lines = data.toString().split('\r\n');
 
-        //GET LIST WITH ARGUMENTS
-        let list = lines[(lines.indexOf('') + 1)].split('\n');
+            //LOOK FOR LANGUAGE LINE IN ARRAY && RETURN
+            local = searchLine(lines,'Accept-Language:');
+            //CUT OUT LOCAL LANGUAGE
+            local = filterLang(local,0);
 
-        //SORT  ARGUMENTS
-        let sortedList = sortBubble(list);
+            //FILTER BODY FROM HEAD && REMOVE \r\n
+            let indexEmptyLine = (lines.findIndex(el => el.length === 0));
+            let contentBody = lines.filter((el,index) => index > indexEmptyLine);
+            contentBody = contentBody.toString().split('\n');
 
-        console.log(`Locale: ${lang}`);
-
-        //SEND RESPONSE && END CONNECTION
-        sendResponse(socket, sortedList);
+            //SORT WITH BUBBLESORT && compareLocal()
+            sortedArr = bubbleSort(contentBody,local);
+        }
+        //WRITE RESPONSE
+        sendResponse(socket,local,sortedArr);
     });
 }).listen(port);
 
-function getLine(array, query) {
-    return array.filter((line) => {
-        return line.includes(query);
-    }).toString();
+function searchLine(array, string) {
+    let target;
+
+    array.forEach( el => {
+        if(el.includes(string)){
+            target = el;
+        }
+    });
+    return target;
 }
 
-function sortBubble(array) {
-    let sorted = array.slice(0, array.length);
-    let changed;
+function filterLang(string,langCount) {
+    return string.replace('Accept-Language: ', '').split(',')[langCount];
+}
+
+function bubbleSort(arr,local) {
+    let swap;
 
     do {
-        changed = false;
-        for (let i = 0; i < sorted.length - 1; i++) {
-            if (sorted[i].localeCompare(sorted[i + 1]) > -1) {
-                let temp = sorted[i];
-                sorted[i] = sorted[i + 1];
-                sorted[i + 1] = temp;
-                changed = true;
+        swap = false;
+        for (let i = 1; i < arr.length; ++i) {
+            if (arr[i-1].localeCompare(arr[i],local) > 0) {
+                [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]];
+                swap = true;
             }
         }
-    } while (changed);
-    return sorted;
+    } while (swap);
+    return arr;
 }
 
-function sendResponse(socket, list) {
+function sendResponse(socket, local, arr) {
     socket.write('HTTP/1.1 200 OK\r\n');
     socket.write('Content-Type: text/plain; charset: utf-8\r\n');
-    socket.write('\r\n');
-    list.forEach((el, index, array) => {
-        if (index !== array.length - 1) {
-            socket.write(el + "\r\n");
-        } else {
-            socket.write(el);
-        }
+    socket.write(`\r\n`);
+    socket.write(`Language: ${local}`);
+    socket.write(`\r\n`);
+    arr.forEach(el => {
+        socket.write(`${el}`);
+        socket.write(`\r\n`);
     });
     socket.end();
 }
