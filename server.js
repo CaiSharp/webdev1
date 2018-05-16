@@ -24,21 +24,23 @@ const server = net.createServer(socket => {
         let request = getRequest(input,socket);
 
         //CREATE FILE PATH && SET CONTENT TYPE (PLAIN TEXT IN CASE THERE"S NONE)
-        let file = path.join(directory, request);
-        let type = contentType[path.extname(file).slice(1)] || 'text/plain';
+        if(request !== undefined){
+            let file = path.join(directory, request);
+            let type = contentType[path.extname(file).slice(1)] || 'text/plain';
 
-        //READ FILE FROM DIRECTORY && WRITE TO SOCKET
-        const fileSystem = fs.readFile(file,(error, data) => {
-            if (error) {
-                sendError(404,socket);
-            } else {
-                socket.write('HTTP/1.1 200 OK\n');
-                socket.write(`Content-Type: ${type}\n\n`);
-                socket.write(data);
-                socket.end();
-            }
-        });
-        console.log(file);
+            //READ FILE FROM DIRECTORY && WRITE TO SOCKET
+            const fileSystem = fs.readFile(file,(error, data) => {
+                if (error) {
+                    sendError(404,socket);
+                } else {
+                    socket.write('HTTP/1.1 200 OK\n');
+                    socket.write(`Content-Type: ${type}\n\n`);
+                    socket.write(data);
+                    socket.end();
+                }
+            });
+            console.log(file);
+        }
     });
 }).listen(port);
 
