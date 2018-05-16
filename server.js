@@ -2,10 +2,6 @@
 const net = require('net');
 const fs = require('fs');
 const path = require('path');
-
-const port = 8000;
-const directory = path.join(__dirname, 'public');
-
 const contentType = {
     txt: 'text/plain',
     html: 'text/html',
@@ -14,6 +10,12 @@ const contentType = {
     png: 'image/png',
     js: 'application/javascript'
 };
+let port = 8000;
+let directory = path.join(__dirname, 'public');
+
+//GET OPTIONAL USER INPUT AND SET PORT&&HOST
+let userInput = getUserInput();
+setParameters(userInput);
 
 //CREATE SERVER
 const server = net.createServer(socket => {
@@ -39,10 +41,43 @@ const server = net.createServer(socket => {
                     socket.end();
                 }
             });
-            console.log(file);
+            console.log(`Requested File: ${file}`);
         }
     });
 }).listen(port);
+
+
+//FUNCTIONS
+function getUserInput() {
+    let arguments = [];
+
+    process.argv.forEach((val,index)=> {
+        if(index > 1){
+            if(isNaN(val)){
+                arguments.push(val)}
+            else {
+                arguments.push(parseInt(val))}
+        }
+    });
+    return arguments;
+}
+
+function setParameters(userInputArr) {
+    if (userInputArr.length === 2) {
+        if (!isNaN(userInputArr[0]) && isNaN(userInputArr[1])) {
+            [port, directory] = [userInput[0], path.join(__dirname, userInput[1])];
+        }
+    }
+    if (userInputArr.length === 1) {
+        if (isNaN(userInputArr[0])){
+            directory = path.join(__dirname, userInput[0]);
+        }
+        if (!isNaN(userInputArr[0])){
+            port = userInputArr[0];
+        }
+    }
+    console.log(`Port: ${port}, Root: ${directory}`);
+}
 
 function getRequest(stringReq,socket) {
 

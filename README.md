@@ -19,5 +19,10 @@ The available files are:
 * "*kermit.png*" 
 * "*kermit.js*" 
 
-The **root folder** && **port** can be configured under **server.js** (const **directory,port**).<br> 
+The **port** && **root folder** can be entered as optional arguments when you start the script. <br>
+e.g.:
+* "*node server 3000 public*" sets **port** && **root folder**
+* "*node server 3000*" sets **port**
+* "*node server public*" sets **root folder**
+
 However it is not recommended.
