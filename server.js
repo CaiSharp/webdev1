@@ -64,22 +64,12 @@ function getUserInput() {
 
 function setParameters(userInputArr) {
 
-    if (userInputArr.length === 2) {
-        for (let i in userInputArr){
-            if(!isNaN(userInputArr[i])){
-                port = userInputArr[i];
-            }
-            if(isNaN(userInputArr[i])){
-                directory = path.join(__dirname, userInputArr[i]);
-            }
+    for (let i in userInputArr){
+        if(!isNaN(userInputArr[i])){
+            port = userInputArr[i];
         }
-    }
-    if (userInputArr.length === 1) {
-        if (isNaN(userInputArr[0])){
-            directory = path.join(__dirname, userInputArr[0]);
-        }
-        if (!isNaN(userInputArr[0])){
-            port = userInputArr[0];
+        if(isNaN(userInputArr[i])){
+            directory = path.join(__dirname, userInputArr[i]);
         }
     }
     console.log(`Port: ${port}, Root: ${directory}`);
