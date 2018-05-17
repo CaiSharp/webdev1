@@ -25,4 +25,4 @@ e.g.:
 * "*node server 3000*" sets **port**
 * "*node server public*" sets **root folder**
 
-However it is not recommended.
+However it is not recommended to change the root.
