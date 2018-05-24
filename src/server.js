@@ -16,5 +16,5 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', articlesController);
 app.get('/details/:id', detailsController);
 app.get('/new', newArticleController);
-app.post('/add-post', addArticleController);
+app.post('/add-article', addArticleController);
 app.listen(port, () => console.log(`App is running on ${port}`));

@@ -5,8 +5,8 @@ module.exports = `
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link rel="stylesheet" type="text/css" href="../css/materialize.css">
-      <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <link rel="stylesheet" type="text/css" href="/materialize.css">
+      <link rel="stylesheet" type="text/css" href="/style.css">
     </head>
 
     <body>
@@ -28,7 +28,7 @@ module.exports = `
         <div class="col s12 m6">
           <div class="card">
             <div class="card-content">
-              <form id="new-article" action="/add-post/" method="post">
+              <form id="new-article" action="/add-article/" method="post">
 
                 <div class="row">
                   <div class="col s6">
