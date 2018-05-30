@@ -12,16 +12,16 @@ document.querySelector('.btn').addEventListener('click',(e) => {
     let articleAuthor = document.getElementById('author').value;
 
     //TITLE NEEDS TO BE BETWEEN 3 && 11 WORDS
-    errorSum =+ validateRange(articleTitle, 'title', 3, 11);
+    errorSum += validateRange(articleTitle, 'title', 3, 11);
 
     //TEASER GOTTA BE BETWEEN 50 && 250 CHARACTERS
-    errorSum =+ validateRange(articleTeaser, 'teaser', 50, 250);
+    errorSum += validateRange(articleTeaser, 'teaser', 50, 250);
 
     //ARTICLE NEEDS TO BE AT LEAST 30 WORDS
-    errorSum =+ validateRange(articleText, 'text', 30, -1);
+    errorSum += validateRange(articleText, 'text', 30, -1);
 
     //AUTHOR CANNOT BE UNNAMED
-    errorSum =+ validateRange(articleAuthor, 'author', 0, -1);
+    errorSum += validateRange(articleAuthor, 'author', 0, -1);
 
     //DATE CAN"T BE IN THE PAST
     //--DATE IS SET AUTOMATICALLY-- || --NO USER INPUT--//

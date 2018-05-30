@@ -14,3 +14,6 @@ p {
 .card .card-content .error{
     color: #e51c23;
 }
+.card .card-content{
+    overflow: hidden;
+}
