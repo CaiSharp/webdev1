@@ -1,6 +1,10 @@
 # webdev1
 
-###basic content delivery server
+###basic content delivery server with client side validation
+
+install the dependencies with: <br>
+ 
+* "*npm install*". 
 
 run the server with the command: <br>
  
@@ -12,6 +16,6 @@ run the server with the command: <br>
 
 The available actions are:
 * "*All Articles*" shows all articles
-* "*Add Article*" opens template to create new article
+* "*Add Article*" opens the template to create a new article, input gets validated
 * "*Read More*" shows more information from the article
 

@@ -10,3 +10,7 @@ b {
 p {
   margin-top: 15px;
 }
+
+.card .card-content .error{
+    color: #e51c23;
+}

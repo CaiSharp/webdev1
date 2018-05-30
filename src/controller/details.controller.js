@@ -19,7 +19,7 @@ let detailsController = (request,response) => {
     let model = {
         title: article.title,
         articletext: article.articletext,
-        published: `${article.published.getDate()}.${article.published.getMonth()}.${article.published.getFullYear()}`,
+        published: `${article.published.getDate()}.${article.published.getMonth()+1}.${article.published.getFullYear()}`,
         author: article.author,
         image: article.image,
     };
