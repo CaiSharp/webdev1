@@ -57,12 +57,12 @@ function validateRange(item, type, min, max) {
             break;
     }
     //DISPLAY ERROR
-    if (value <= min && min !== -1) {
-        document.querySelector(`.${type}-error`).textContent = `${error} needs to be higher than ${min}!`;
-        return 1;
-    }
     if (value <= min && min === 0) {
         document.querySelector(`.${type}-error`).textContent = `${error} needs to be set!`;
+        return 1;
+    }
+    if (value <= min && min !== -1) {
+        document.querySelector(`.${type}-error`).textContent = `${error} needs to be higher than ${min}!`;
         return 1;
     }
     if (value >= max && max !== -1) {
@@ -70,7 +70,13 @@ function validateRange(item, type, min, max) {
         return 1;
     }
     //CLEAR ERROR IF PASS
-    if (min !== -1 && max !== -1) {
+    document.querySelector(`.${type}-error`).textContent = '';
+    return 0;
+}
+
+
+//LEFTOVER LOGIC FOR ERROR CLEAR
+/*if (min !== -1 && max !== -1) {
         if (value < max && value > min){
             document.querySelector(`.${type}-error`).textContent = '';
             return 0;
@@ -93,5 +99,4 @@ function validateRange(item, type, min, max) {
     if (min === -1 && max === -1) {
         document.querySelector(`.${type}-error`).textContent = '';
         return 0;
-    }
-}
+    }*/
