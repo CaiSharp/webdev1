@@ -21,9 +21,9 @@ module.exports = `
       </div>
     </nav>
 
-    
+  
     <div class="container">
-
+    <div class="error-info">Please fix the highlighted input fields</div>
     <div class="row">  
         <div class="col s12 m6">
           <div class="card">
@@ -33,7 +33,7 @@ module.exports = `
                 <div class="row">
                   <div class="col s6">
                   <label for="author">Author</label>
-                    <input id="author" name="author" type="text" class="validate">
+                    <input id="author" name="author" type="text" class="validate error-inp">
                     <p class="author-error error"></p>
                   </div>
                 </div>
@@ -41,7 +41,7 @@ module.exports = `
                 <div class="row">
                   <div class="col s12">
                   <label for="title">Title</label>
-                    <input id="title" name="title" type="text" class="validate">
+                    <input id="title" name="title" type="text" class="validate error-inp">
                     <p class="title-error error"></p>
                   </div>
                 </div>
@@ -56,7 +56,7 @@ module.exports = `
                 <div class="row">
                   <div class="col s12">
                     <label for="teaser">Teaser</label>
-                    <textarea id="teaser" name="teaser" class="materialize-textarea"></textarea>
+                    <textarea id="teaser" name="teaser" class="materialize-textarea error-inp"></textarea>
                     <p class="teaser-error error"></p>
                   </div>
                 </div>
@@ -64,7 +64,7 @@ module.exports = `
                 <div class="row">
                   <div class="col s12">
                     <label for="articletext">Artikel</label>
-                    <textarea id="articletext" name="articletext" class="materialize-textarea"></textarea>
+                    <textarea id="articletext" name="articletext" class="materialize-textarea error-inp"></textarea>
                     <p class="text-error error"></p>
                   </div>
                 </div>

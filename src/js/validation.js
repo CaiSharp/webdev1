@@ -1,7 +1,30 @@
 //FORM VALIDATION CLIENT SIDE
 
+//SUBMIT VALIDATION
 document.querySelector('.btn').addEventListener('click',(e) => {
     e.preventDefault();
+
+    //VALIDATE && SUBMIT IF NO ERROR WAS FOUND
+    if (validateAll() === 0) {
+        let form = document.querySelector('form');
+        form.submit();
+    }else{
+        //DISPLAY ERROR BANNER ON FAILED SUBMIT, REMOVE AFTER 3s
+        document.querySelector('.error-info').classList.add('show');
+        setTimeout(() =>{
+            document.querySelector('.error-info').classList.remove('show');
+        },3000)
+    }
+});
+
+//INPUT VALIDATION
+document.querySelectorAll('.error-inp').forEach( el => {
+    el.addEventListener('input', () => {
+        validateAll();
+    });
+});
+
+function validateAll() {
     //ERROR CHECKSUM
     let errorSum = 0;
 
@@ -13,25 +36,15 @@ document.querySelector('.btn').addEventListener('click',(e) => {
 
     //TITLE NEEDS TO BE BETWEEN 3 && 11 WORDS
     errorSum += validateRange(articleTitle, 'title', 3, 11);
-
     //TEASER GOTTA BE BETWEEN 50 && 250 CHARACTERS
     errorSum += validateRange(articleTeaser, 'teaser', 50, 250);
-
     //ARTICLE NEEDS TO BE AT LEAST 30 WORDS
     errorSum += validateRange(articleText, 'text', 30, -1);
-
     //AUTHOR CANNOT BE UNNAMED
     errorSum += validateRange(articleAuthor, 'author', 0, -1);
 
-    //DATE CAN"T BE IN THE PAST
-    //--DATE IS SET AUTOMATICALLY-- || --NO USER INPUT--//
-
-    //SUBMIT IF NO ERROR WAS FOUND
-    if (errorSum === 0) {
-        let form = document.querySelector('form');
-        form.submit();
-    }
-});
+    return errorSum;
+}
 
 function validateRange(item, type, min, max) {
     let value;
@@ -73,30 +86,3 @@ function validateRange(item, type, min, max) {
     document.querySelector(`.${type}-error`).textContent = '';
     return 0;
 }
-
-
-//LEFTOVER LOGIC FOR ERROR CLEAR
-/*if (min !== -1 && max !== -1) {
-        if (value < max && value > min){
-            document.querySelector(`.${type}-error`).textContent = '';
-            return 0;
-        }
-    }
-    if (min !== -1 && max !== -1) {
-        if (value < max && value > min){
-            document.querySelector(`.${type}-error`).textContent = '';
-            return 0;
-        }
-    }
-    if(min === -1 && value < max){
-        document.querySelector(`.${type}-error`).textContent = '';
-        return 0;
-    }
-    if(max === -1 && value > min){
-        document.querySelector(`.${type}-error`).textContent = '';
-        return 0;
-    }
-    if (min === -1 && max === -1) {
-        document.querySelector(`.${type}-error`).textContent = '';
-        return 0;
-    }*/

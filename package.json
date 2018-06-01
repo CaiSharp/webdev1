@@ -4,7 +4,8 @@
   "description": "webdev uebung01",
   "main": "script.js",
   "scripts": {
-    "start": "node ./src/server"
+    "start": "node ./src/server",
+    "test": "nodemon ./src/server"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "faker": "^4.1.0",
-    "mustache": "^2.3.0"
+    "mustache": "^2.3.0",
+    "nodemon": "^1.17.5"
   }
 }
