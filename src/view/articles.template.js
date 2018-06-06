@@ -7,6 +7,7 @@ module.exports = `
       <!--Import materialize.css-->
       <link rel="stylesheet" type="text/css" href="/materialize.css">
       <link rel="stylesheet" type="text/css" href="/style.css">
+   
     </head>
 
     <body>
@@ -24,6 +25,20 @@ module.exports = `
     
     <div class="container">
 
+    <div class="row">
+    <form action="/filter" method="post">
+        <div class="input-field col s4">
+            <input id="filter" type="text" name="filter">
+            <label for="filter"></label>
+        </div>
+        <div class="input-field col s2">
+            <button class="btn waves-effect waves-light" type="submit">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+        
+    </div>
     <div class="row">
       {{#fakeData}}    
         <div class="col s12 m6">
@@ -44,6 +59,7 @@ module.exports = `
     </div> 
 
     </div>
+    <script src="/autocomplete.js"></script>
     </body>
   </html>
 `;
