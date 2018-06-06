@@ -15,7 +15,7 @@ run the server with the command: <br>
 **localhost:8000**
 
 The available actions are:
-* "*All Articles*" shows all articles
+* "*All Articles*" shows all articles && you can search for specific ones (with suggestions)
 * "*Add Article*" opens the template to create a new article, input gets validated
 * "*Read More*" shows more information from the article
 

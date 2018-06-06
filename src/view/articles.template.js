@@ -37,8 +37,9 @@ module.exports = `
             </button>
         </div>
     </form>
-        
     </div>
+    <div id="suggestions"></div>
+    
     <div class="row">
       {{#fakeData}}    
         <div class="col s12 m6">
