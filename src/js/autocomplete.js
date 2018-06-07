@@ -3,18 +3,25 @@
 //VARIABLES
 let data;
 let suggestions;
-
-document.getElementById('filter').addEventListener('input', e => {
-    let input = document.getElementById('filter').value;
-    console.log(input);
-    //GET ARTICLES
-    getJSON('/get-articles');
-    //CREATE SUGGESTIONS && FILTER FOR MATCHING INPUT
-    suggestions = createSuggestions(JSON.parse(data));
-    suggestions = filterSuggestions(suggestions,input);
-    //DISPLAY SUGGESTIONS
-    displaySuggestions(suggestions);
-});
+//GET ARTICLES
+fetch('/get-articles')
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(myJson) {
+        data = myJson;
+        //ADD EVENTLISTENER
+        document.getElementById('filter').addEventListener('input', e => {
+            //GET INPUT
+            let input = document.getElementById('filter').value;
+            //CREATE SUGGESTIONS && FILTER FOR MATCHING INPUT
+            suggestions = createSuggestions(JSON.parse(data));
+            suggestions = filterSuggestions(suggestions,input);
+            //DISPLAY SUGGESTIONS
+            displaySuggestions(suggestions);
+        });
+    })
+;
 
 function getJSON(url){
     fetch(url)
@@ -28,17 +35,28 @@ function getJSON(url){
 
 function createSuggestions(arrData) {
     let suggestions = [];
+    let removePoint = [];
 
+    //SPLIT TITLE INTO WORDS
     arrData.forEach( el => {
         let titleSplit = el.title.split(' ');
         titleSplit = titleSplit.filter(el => el.length>=3);
         suggestions = [...suggestions,...titleSplit];
     });
+    //FILTER OUT POINTS
+    suggestions.forEach(el=>{
+        if(el.endsWith('.')){
+            removePoint.push(el.slice(0,-1));
+        }else{
+            removePoint.push(el)
+        }
+    });
+    suggestions = removePoint;
     return suggestions;
 }
 
 function filterSuggestions(arrData, input) {
-    return arrData.filter((el)=>el.includes(input));
+    return arrData.filter((el)=>el.toLowerCase().includes(input.toLowerCase()));
 }
 
 function displaySuggestions (array) {
