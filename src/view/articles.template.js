@@ -28,7 +28,7 @@ module.exports = `
     <div class="row">
     <form action="/filter" method="post">
         <div class="input-field col s4">
-            <input id="filter" type="text" name="filter">
+            <input id="filter" type="text" name="filter" autocomplete="off">
             <label for="filter"></label>
         </div>
         <div class="input-field col s2">
