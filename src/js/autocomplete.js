@@ -1,8 +1,9 @@
 //AUTOCOMPLETE FOR INPUT FILTER FIELD
 
-//VARIABLES
+//GLOBAL VARIABLES
 let data;
 let suggestions;
+
 //GET ARTICLES
 fetch('/get-articles')
     .then(function(response) {
@@ -11,11 +12,11 @@ fetch('/get-articles')
     .then(function(myJson) {
         data = myJson;
         //ADD EVENTLISTENER
-        document.getElementById('filter').addEventListener('input', e => {
+        document.getElementById('filter').addEventListener('input', () => {
             //GET INPUT
             let input = document.getElementById('filter').value;
-            //CREATE SUGGESTIONS && FILTER FOR MATCHING INPUT
-            suggestions = createSuggestions(JSON.parse(data));
+            //CREATE SUGGESTIN.parse(data);ONS && FILTER FOR MATCHING INPUT
+            suggestions = JSON.parse(data);
             suggestions = filterSuggestions(suggestions,input);
             //DISPLAY SUGGESTIONS
             displaySuggestions(suggestions);
@@ -23,61 +24,26 @@ fetch('/get-articles')
     })
 ;
 
-function getJSON(url){
-    fetch(url)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-            data = myJson;
-        });
+function filterSuggestions(arr, input) {
+    return arr.filter((el)=>el.toLowerCase().includes(input.toLowerCase()));
 }
 
-function createSuggestions(arrData) {
-    let suggestions = [];
-    let removePoint = [];
+function displaySuggestions (arr) {
+    const element = document.querySelector('.suggestions--list');
+    let listSuggestion = '';
 
-    //SPLIT TITLE INTO WORDS
-    arrData.forEach( el => {
-        let titleSplit = el.title.split(' ');
-        titleSplit = titleSplit.filter(el => el.length>=3);
-        suggestions = [...suggestions,...titleSplit];
-    });
-    //FILTER OUT POINTS
-    suggestions.forEach(el=>{
-        if(el.endsWith('.')){
-            removePoint.push(el.slice(0,-1));
-        }else{
-            removePoint.push(el)
+    if (arr.length > 0) {
+        for (let i = 0; i < 5; i++) {
+            listSuggestion = listSuggestion.concat(`<li><span class="sugg-span" onclick="filter(this)">${typeof arr[i] == 'undefined' ? '' : arr[i] }</span></li>`);
         }
-    });
-    suggestions = removePoint;
-    return suggestions;
-}
-
-function filterSuggestions(arrData, input) {
-    return arrData.filter((el)=>el.toLowerCase().includes(input.toLowerCase()));
-}
-
-function displaySuggestions (array) {
-    const element = document.querySelector('#suggestions');
-    if (array.length > 0) {
-        element.innerHTML = `
-      <ul>
-        <li><span class="sugg-span" onclick="searchIt(this)">${typeof array[0] == 'undefined' ? '' : array[0] }</span></li>
-        <li><span class="sugg-span" onclick="searchIt(this)">${typeof array[1] == 'undefined' ? '' : array[1] }</span></li>
-        <li><span class="sugg-span" onclick="searchIt(this)">${typeof array[2] == 'undefined' ? '' : array[2] }</span></li>
-        <li><span class="sugg-span" onclick="searchIt(this)">${typeof array[3] == 'undefined' ? '' : array[3] }</span></li>
-        <li><span class="sugg-span" onclick="searchIt(this)">${typeof array[4] == 'undefined' ? '' : array[4] }</span></li>
-      </ul>
-    `;
+        element.innerHTML = (listSuggestion);
     } else {
         element.innerHTML = '';
     }
 }
 
-function searchIt (input) {
-    let searchTerm = input.textContent;
-    document.getElementById('filter').value = searchTerm;
+function filter (input) {
+    let filter = input.textContent;
+    document.getElementById('filter').value = filter;
     document.querySelector('form').submit();
 }

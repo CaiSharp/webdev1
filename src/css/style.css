@@ -52,17 +52,15 @@ p {
 
 #suggestions {
     position: absolute;
-    top: 120px;
+    top: 123px;
     left: 0;
     background-color: #fff;
     z-index: 100;
-
-    width: 100%;
-    border-bottom: 2px solid gray;
+    width: 50%;
 }
 
 #suggestions ul {
-    padding-left: 48%;
+    text-align: center;
 }
 
 #suggestions ul li {

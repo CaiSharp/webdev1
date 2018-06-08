@@ -38,7 +38,9 @@ module.exports = `
         </div>
     </form>
     </div>
-    <div id="suggestions"></div>
+    <div id="suggestions">
+        <ul class="suggestions--list"></ul>
+    </div>
     
     <div class="row">
       {{#fakeData}}    
