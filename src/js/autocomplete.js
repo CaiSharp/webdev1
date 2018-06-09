@@ -15,7 +15,7 @@ fetch('/get-articles')
         document.getElementById('filter').addEventListener('input', () => {
             //GET INPUT
             let input = document.getElementById('filter').value;
-            //CREATE SUGGESTIN.parse(data);ONS && FILTER FOR MATCHING INPUT
+            //CREATE SUGGESTIONS && FILTER FOR MATCHING INPUT
             suggestions = JSON.parse(data);
             suggestions = filterSuggestions(suggestions,input);
             //DISPLAY SUGGESTIONS
@@ -43,7 +43,6 @@ function displaySuggestions (arr) {
 }
 
 function filter (input) {
-    let filter = input.textContent;
-    document.getElementById('filter').value = filter;
+    document.getElementById('filter').value = input.textContent;
     document.querySelector('form').submit();
 }
