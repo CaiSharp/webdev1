@@ -1,6 +1,6 @@
 # webdev1
 
-###basic content delivery server with client side validation
+###basic content delivery server with SPA app
 
 install the dependencies with: <br>
  
@@ -9,6 +9,10 @@ install the dependencies with: <br>
 run the server with the command: <br>
  
 * "*npm start*". 
+
+run the SPA app: <br>
+
+* navigate to "*SPA/index.html*" and "*run*" it
 
 <br>Then use your browser and navigate to the following address: 
 

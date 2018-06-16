@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SPA</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+	<script src="router.js"></script>
+	<script src="template.js"></script>
+
+	<script id="template-list" type="application/x-handlebars-template">
+		<h1>{{title}}</h1>
+		<div class="row">
+			{{#each articles}}
+			<div class="col s12 m6">
+				<div class="card">
+					<div class="card-image">
+						<img src={{image}}>
+						<span class="card-title">{{title}}</span>
+					</div>
+					<div class="card-content">
+						<p>{{teaser}}</p>
+					</div>
+					<div class="card-action">
+						<a href="/details/{{id}}">Read more</a>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</script>
+
+	<script id="template-new" type="application/x-handlebars-template">
+		<h1>{{title}}</h1>
+		<div class="form">
+			<form action="http://localhost:3000/spa_new" enctype="multipart/form-data" method="POST" class="add-new-article">
+
+				<div class="row">
+					<div class="col s6">
+						<label for="author">Author</label>
+						<input id="author" name="author" type="text" class="validate error-inp">
+						<p class="author-error error"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s6">
+						<label for="title">Title</label>
+						<input id="title" name="title" type="text" class="validate error-inp">
+						<p class="title-error error"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12">
+						<label for="image">Image Link</label>
+						<input id="image" name="image" type="text" class="validate">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12">
+						<label for="teaser">Teaser</label>
+						<textarea id="teaser" name="teaser" class="materialize-textarea error-inp"></textarea>
+						<p class="teaser-error error"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12">
+						<label for="articletext">Artikel</label>
+						<textarea id="articletext" name="articletext" class="materialize-textarea error-inp"></textarea>
+						<p class="text-error error"></p>
+					</div>
+				</div>
+
+				<input class="btn waves-effect waves-light" type="submit" value="Add">
+			</form>
+		</div>
+	</script>
+
+</head>
+<body>
+
+<div class="container">
+
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo right">Logo</a>
+			<ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li class="nav-item list"><a>List</a></li>
+				<li class="nav-item new"><a>Add Article</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<main></main>
+</div>
+
+	<script src="app.js"></script>
+</body>
+</html>
