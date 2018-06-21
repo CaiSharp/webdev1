@@ -1,9 +1,10 @@
+//GLOBAL VARIABLES
 const mustache = require('mustache');
 const fetch = require('node-fetch');
 const entriesTemplate = require('../view/entries.template');
 let data;
 
-//RENDER ALL CATEGORIES
+//RENDER ALL ENTRIES OF SINGLE CATEGORY
 let singleCategoryController = (request,response) => {
     let categoryName = request.params.name;
     fetch(`http://localhost:8000/categories_API/${categoryName}`, {

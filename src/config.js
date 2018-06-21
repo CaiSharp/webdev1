@@ -1,3 +1,4 @@
+//GLOBAL VARIABLE
 const mysql = require('mysql');
 
 //DATABASE VARIABLES
@@ -6,7 +7,7 @@ const user = "";
 const password = "";
 const database = "craigslist";
 
-
+//DATABASE LOGIN
 let config = {
     host: host,
     user: user,

@@ -6,7 +6,9 @@ install the dependencies with: <br>
  
 * "*npm install*". 
 
-add the "*mySQL*" from "*/data*" and edit login data in the "*config.js*"
+add database with: <br>
+
+* import "*mySQL*" from "*/data*" and edit login data in the "*config.js*"
 
 <br>run the server with the command: <br>
  
@@ -17,7 +19,7 @@ add the "*mySQL*" from "*/data*" and edit login data in the "*config.js*"
 **localhost:8000**
 
 The available actions are:
-* "*Categories*" 
-* "*Entries*" 
-* "*Show Entries*" || "*Show Categories*
+* "*Categories*" shows all available categories
+* "*Entries*" shows all available entries
+* "*Show Entries*" || "*Show Categories* shows all entries from a specific category || returns to all categories
 

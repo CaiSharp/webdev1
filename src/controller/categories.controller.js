@@ -1,3 +1,4 @@
+//GLOBAL VARIABLES
 const mustache = require('mustache');
 const fetch = require('node-fetch');
 const categoriesTemplate = require('../view/categories.template');

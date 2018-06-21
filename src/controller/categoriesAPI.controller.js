@@ -1,3 +1,4 @@
+//GLOBAL VARIABLES
 const mysql = require('mysql');
 const config = require('../config').config;
 let data;
@@ -13,12 +14,14 @@ const connection = mysql.createConnection({
     database: config.database
 });
 
-//RENDER ALL CATEGORIES
+//RETURN ALL CATEGORIES
 let categoriesAPIController = (request,response) => {
 
-    //CONNECT && RETRIEVE DATA
+    //CONNECT TO DATABASE && RETRIEVE DATA
     connection.query(searchQuery, function (err, result) {
         if (err) throw err;
+
+        //CONVERT RAWPACKET OBJECT && RETURN
         data = Object.values(JSON.parse(JSON.stringify(result)));
         return response.send(data);
     });
