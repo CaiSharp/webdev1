@@ -1,20 +1,18 @@
 //GLOBAL VARIABLES
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const expressSanitized = require('express-sanitize-escape');
 const cors = require('cors');
 const app = express();
 const port = 8000;
 
 //CONTROLLER
-const newArticleController = require('./controller/newArticle.controller');
-const detailsController = require('./controller/details.controller');
-const articlesController = require('./controller/articles.controller');
-const addArticleController = require('./controller/addArticle.controller');
-const filterArticlesController = require('./controller/filterArticles.controller');
-const suggestionsController = require('./controller/suggestions.controller');
-const SPA_listController = require('./controller/spa.list.controller');
-const SPA_newController = require('./controller/spa.new.controller');
+const categoriesController = require('./controller/categories.controller');
+const categoriesAPIController = require('./controller/categoriesAPI.controller');
+const entriesAPIController = require('./controller/entriesAPI.controller');
+const entriesController = require('./controller/entries.controller');
+const singleCategoryController = require('./controller/singleCategory.controller');
+const singleCategoryAPIController = require('./controller/singleCategoryAPI.controller');
 
 //CREATE SERVER && HANDLE CONTROLLERS
 app.use(express.static('src/css'));
@@ -23,35 +21,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
+//SANITIZE
+app.use(expressSanitized.middleware());
+expressSanitized.sanitizeParams(app, ['id','name']);
+
 //ROUTES
-app.get('/', articlesController);
-app.get('/get-articles', suggestionsController);
-app.get('/details/:id', detailsController);
-app.get('/new', newArticleController);
-app.get('/spa_list', SPA_listController);
-app.post('/spa_new', SPA_newController);
-app.post('/add-article', addArticleController);
-app.post('/filter', filterArticlesController);
+app.get('/', categoriesController);
+app.get('/categories', categoriesController);
+app.get('/categories_API', categoriesAPIController);
+app.get('/entries', entriesController);
+app.get('/entries_API', entriesAPIController);
+app.get('/categories/:name', singleCategoryController);
+app.get('/categories_API/:name', singleCategoryAPIController);
 
 app.listen(port || process.env.PORT, () => console.log(`App is running on ${port}`));
-
-/*
-//DATABASE
-let con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "mytodo"
-});
-
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-
-    let sql = "SELECT * FROM users";
-
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log(result);
-    });
-});*/

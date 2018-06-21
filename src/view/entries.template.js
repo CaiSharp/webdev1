@@ -7,6 +7,7 @@ module.exports = `
       <!--Import materialize.css-->
       <link rel="stylesheet" type="text/css" href="/materialize.css">
       <link rel="stylesheet" type="text/css" href="/style.css">
+   
     </head>
 
     <body>
@@ -21,17 +22,21 @@ module.exports = `
       </div>
     </nav>
 
+    
     <div class="container">
-
+ 
     <div class="row">
       {{#data}}    
         <div class="col s12 m6">
           <div class="card">
             <div class="card-content">
             <span class="card-title">{{name}}</span>
+            <p>{{description}}</p>
+            <p>{{price}}</p>
+            <p>{{email}}</p>
             </div>
             <div class="card-action">
-              <a href="/categories/{{id}}">To Category</a>
+              <a href="/categories/{{categoryId}}">Show Categories</a>
             </div>
           </div>
         </div>
